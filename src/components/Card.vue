@@ -15,10 +15,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
   cursor: pointer;
   border-radius: 4px;
   color: white;
@@ -28,11 +28,13 @@ export default {
 
 .hidden {
   background-color: #7391b1;
+  background-size: cover;
   transition: .4s all ease-in-out;
 }
 
 .animated {
   animation: flipCard .4s ease-in-out;
+  transition: .3s all ease-in-out;
 }
 
 @keyframes flipCard {
