@@ -2,7 +2,7 @@
   <div>
     <div class="clicks">
       <div class="title">Cards shows: &nbsp; <span>{{ this.numberOfClicks }}</span></div>
-      <div v-if="this.bestResult" class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
+      <div v-if="bestResult" class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
     </div>
 
     <div class="cards_wrapper">
@@ -10,7 +10,9 @@
         <app-card @click="onCardClick(card)" v-for="(card, i) in shuffledNumbers" :card="card" :key="i"></app-card>
       </div>
 
-      <div v-if="endOfTheGame" class="congratulations">Congratulations!<span>You found all pairs</span></div>
+      <div v-if="endOfTheGame" class="congratulations">Congratulations!
+        <span v-if="newBestResult">New best result!</span>
+      </div>
       <div @click="restartTheGame" class="btn">Restart</div>
 
     </div>
@@ -54,7 +56,8 @@ export default {
       newCurrentId: null,
       endOfTheGame: false,
       numberOfClicks: 0,
-      bestResult: null
+      bestResult: null,
+      newBestResult: false
     }
   },
 
@@ -72,7 +75,6 @@ export default {
         card.backSide = false;
         card.animated = true;
         this.numberOfClicks++;
-        console.log(this.numberOfClicks);
 
         if (!this.currentCard) {
           this.currentCard = card.number;
@@ -104,8 +106,9 @@ export default {
           if (this.checkRestCards.length === 0) {
             this.endOfTheGame = true;
 
-            if (this.numberOfClicks < this.bestResult) {
+            if (!this.bestResult || this.numberOfClicks < this.bestResult) {
               this.bestResult = this.numberOfClicks;
+              this.newBestResult = true;
             }
           }
         }
@@ -142,7 +145,7 @@ export default {
       this.shuffleCards();
       this.endOfTheGame = false;
       this.numberOfClicks = 0;
-
+      this.newBestResult = false;
     }
   },
 
@@ -153,6 +156,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/variables";
+
 .cards_wrapper {
   display: flex;
   flex-direction: column;
@@ -179,12 +184,15 @@ export default {
   margin-top: 30px;
   font-size: 34px;
   font-weight: bold;
-  color: #7391b1;
+  color: $main;
   animation: fadeUp .9s ease-in-out;
 
   span {
     margin-top: 10px;
     font-size: 22px;
+    background: $gradient-blue-violet;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -192,38 +200,40 @@ export default {
   box-sizing: border-box;
   width: calc(100% - 10px);
   margin-top: 20px;
-  border: 1px solid #7391b1;
+  border: 1px solid $main;
   border-radius: 4px;
-  padding: 10px;
+  padding: 15px;
+  cursor: pointer;
   font-size: 14px;
+  line-height: 100%;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #7391b1;
+  color: $main;
   transition: .4s all ease-in-out;
-  cursor: pointer;
 
   &:hover {
-    background-color: #7391b1;
+    background-color: $secondary;
+    border: 1px solid $secondary;
     color: white;
     transition: .6s all ease-in-out;
 
     @media (max-width: 500px) {
       background-color: transparent;
-      color: #7391b1;
+      color: $main;
+      border: 1px solid $main;
     }
   }
 
   &:active {
-    background-color: #94b7dc;
-    border: 1px solid #94b7dc;
+    border: 1px solid $secondary;
     transition: .2s all ease-in-out;
     transform: scale(.99);
     letter-spacing: 1.3px;
 
     @media (max-width: 500px) {
       background-color: transparent;
-      color: #94b7dc;
-      border: 1px solid #94b7dc;
+      color: $secondary;
+      border: 1px solid $secondary;
     }
   }
 }
@@ -233,7 +243,7 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 20px;
-  color: #7391b1;
+  color: $main;
 
   &:first-child {
     margin-top: 18px;

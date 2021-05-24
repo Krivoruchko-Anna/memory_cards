@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/style/variables";
+
 .card {
   display: flex;
   justify-content: center;
@@ -22,7 +24,7 @@ export default {
   cursor: pointer;
   border-radius: 4px;
   color: white;
-  background-color: #94b7dc;
+  background-color: $secondary;
   transition: .3s all ease-in-out;
 
   @media (max-width: 500px) {
@@ -36,7 +38,7 @@ export default {
 }
 
 .hidden {
-  background-color: #7391b1;
+  background-color: $main;
   background-size: cover;
   transition: .4s all ease-in-out;
 }
