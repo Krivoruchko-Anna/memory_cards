@@ -2,7 +2,7 @@
   <div>
     <div class="clicks">
       <div class="title">Cards shows: &nbsp; <span>{{ this.numberOfClicks }}</span></div>
-      <div class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
+      <div v-if="this.bestResult" class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
     </div>
 
     <div class="cards_wrapper">
@@ -104,7 +104,7 @@ export default {
           if (this.checkRestCards.length === 0) {
             this.endOfTheGame = true;
 
-            if (!this.bestResult || this.numberOfClicks < this.bestResult) {
+            if (this.numberOfClicks < this.bestResult) {
               this.bestResult = this.numberOfClicks;
             }
           }
@@ -245,7 +245,6 @@ export default {
 
   span {
     font-weight: bold;
-    font-size: 22px;
   }
 }
 
