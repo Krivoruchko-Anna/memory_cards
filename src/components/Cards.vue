@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clicks">
-      <div class="title">Cards shows: &nbsp; <span>{{ this.numberOfClicks }}</span></div>
+      <div class="title">Cards showings: &nbsp; <span>{{ this.numberOfClicks }}</span></div>
       <div v-if="bestResult" class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
     </div>
 
