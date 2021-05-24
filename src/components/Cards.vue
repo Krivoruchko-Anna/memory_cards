@@ -1,6 +1,12 @@
 <template>
-  <div class="cards">
-    <app-card @click="onCardClick(card)" v-for="(card, i) in shuffledNumbers" :card="card" :key="i"></app-card>
+  <div class="cards_wrapper">
+    <div class="cards">
+      <app-card @click="onCardClick(card)" v-for="(card, i) in shuffledNumbers" :card="card" :key="i"></app-card>
+    </div>
+
+    <div v-if="endOfTheGame" class="congratulations">Congratulations!<span>You found all pairs</span></div>
+    <div @click="restartTheGame" class="btn">Restart</div>
+
   </div>
 </template>
 
@@ -38,7 +44,16 @@ export default {
       currentCard: null,
       currentId: null,
       newCurrentCard: null,
-      newCurrentId: null
+      newCurrentId: null,
+      endOfTheGame: false
+    }
+  },
+
+  computed: {
+    checkRestCards() {
+      return this.shuffledNumbers.filter(item => {
+        return !item.open;
+      });
     }
   },
 
@@ -63,6 +78,7 @@ export default {
 
         if (this.currentCard === this.newCurrentCard && this.currentId !== this.newCurrentId) {
           this.lockOpenedCardsWithNumber(card.number);
+
         } else {
           this.returnsCardsToBackSide(card);
         }
@@ -75,6 +91,10 @@ export default {
           item.clickable = false;
           item.backSide = false;
           item.open = true;
+
+          if (this.checkRestCards.length === 0) {
+            this.endOfTheGame = true;
+          }
         }
       })
     },
@@ -92,19 +112,113 @@ export default {
           item.clickable = true;
         })
       }, 2000)
+    },
+
+    shuffleCards() {
+      this.shuffledNumbers = this.cards.sort(() => Math.random() - 0.5);
+    },
+
+    restartTheGame() {
+      this.cards.map(item => {
+        item.backSide = true;
+        item.clickable = true;
+        item.open = false;
+        item.animated = false;
+      });
+
+      this.shuffleCards();
+      this.endOfTheGame = false;
     }
   },
 
   mounted() {
-    this.shuffledNumbers = this.cards.sort(() => Math.random() - 0.5);
+    this.shuffleCards();
   }
 }
 </script>
 
 <style lang="scss">
+.cards_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .9s all;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
-  width: 400px;
+  width: 360px;
+  transition: .9s all;
+
+  @media (max-width: 500px) {
+    width: 320px;
+  }
+}
+
+.congratulations {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  font-size: 34px;
+  font-weight: bold;
+  color: #7391b1;
+  animation: fadeUp .9s ease-in-out;
+
+  span {
+    margin-top: 10px;
+    font-size: 22px;
+  }
+}
+
+.btn {
+  box-sizing: border-box;
+  width: calc(100% - 10px);
+  margin-top: 20px;
+  border: 1px solid #7391b1;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7391b1;
+  transition: .4s all ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #7391b1;
+    color: white;
+    transition: .6s all ease-in-out;
+
+    @media (max-width: 500px) {
+      background-color: transparent;
+      color: #7391b1;
+    }
+  }
+
+  &:active {
+    background-color: #94b7dc;
+    border: 1px solid #94b7dc;
+    transition: .2s all ease-in-out;
+    transform: scale(.99);
+    letter-spacing: 1.3px;
+
+    @media (max-width: 500px) {
+      background-color: transparent;
+      color: #94b7dc;
+      border: 1px solid #94b7dc;
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>

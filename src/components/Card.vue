@@ -24,6 +24,11 @@ export default {
   color: white;
   background-color: #94b7dc;
   transition: .3s all ease-in-out;
+
+  @media (max-width: 500px) {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .hidden {
