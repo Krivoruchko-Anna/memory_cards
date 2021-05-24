@@ -1,12 +1,19 @@
 <template>
-  <div class="cards_wrapper">
-    <div class="cards">
-      <app-card @click="onCardClick(card)" v-for="(card, i) in shuffledNumbers" :card="card" :key="i"></app-card>
+  <div>
+    <div class="clicks">
+      <div class="title">Cards shows: &nbsp; <span>{{ this.numberOfClicks }}</span></div>
+      <div class="title">Best result: &nbsp; <span>{{ this.bestResult }}</span></div>
     </div>
 
-    <div v-if="endOfTheGame" class="congratulations">Congratulations!<span>You found all pairs</span></div>
-    <div @click="restartTheGame" class="btn">Restart</div>
+    <div class="cards_wrapper">
+      <div class="cards">
+        <app-card @click="onCardClick(card)" v-for="(card, i) in shuffledNumbers" :card="card" :key="i"></app-card>
+      </div>
 
+      <div v-if="endOfTheGame" class="congratulations">Congratulations!<span>You found all pairs</span></div>
+      <div @click="restartTheGame" class="btn">Restart</div>
+
+    </div>
   </div>
 </template>
 
@@ -45,7 +52,9 @@ export default {
       currentId: null,
       newCurrentCard: null,
       newCurrentId: null,
-      endOfTheGame: false
+      endOfTheGame: false,
+      numberOfClicks: 0,
+      bestResult: null
     }
   },
 
@@ -59,10 +68,11 @@ export default {
 
   methods: {
     onCardClick(card) {
-
       if (card.clickable && !card.open) {
         card.backSide = false;
         card.animated = true;
+        this.numberOfClicks++;
+        console.log(this.numberOfClicks);
 
         if (!this.currentCard) {
           this.currentCard = card.number;
@@ -86,14 +96,17 @@ export default {
 
     lockOpenedCardsWithNumber(number) {
       this.shuffledNumbers.map(item => {
-
-        if (item.number === number) {
+        if (item.number === number && item.number === this.newCurrentCard) {
           item.clickable = false;
           item.backSide = false;
           item.open = true;
 
           if (this.checkRestCards.length === 0) {
             this.endOfTheGame = true;
+
+            if (!this.bestResult || this.numberOfClicks < this.bestResult) {
+              this.bestResult = this.numberOfClicks;
+            }
           }
         }
       })
@@ -110,7 +123,7 @@ export default {
 
         this.shuffledNumbers.map(item => {
           item.clickable = true;
-        })
+        });
       }, 2000)
     },
 
@@ -128,6 +141,8 @@ export default {
 
       this.shuffleCards();
       this.endOfTheGame = false;
+      this.numberOfClicks = 0;
+
     }
   },
 
@@ -142,18 +157,20 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transition: .9s all;
+  height: calc(100vh - 90px);
+  width: 360px;
+
+  @media (max-width: 500px) {
+    width: 320px;
+  }
 }
 
 .cards {
   display: flex;
   flex-wrap: wrap;
-  width: 360px;
   transition: .9s all;
-
-  @media (max-width: 500px) {
-    width: 320px;
-  }
 }
 
 .congratulations {
@@ -208,6 +225,27 @@ export default {
       color: #94b7dc;
       border: 1px solid #94b7dc;
     }
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 20px;
+  color: #7391b1;
+
+  &:first-child {
+    margin-top: 18px;
+  }
+
+  &:last-child {
+    margin-top: 5px;
+  }
+
+  span {
+    font-weight: bold;
+    font-size: 22px;
   }
 }
 

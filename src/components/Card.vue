@@ -29,6 +29,10 @@ export default {
     width: 50px;
     height: 50px;
   }
+
+  &:hover {
+    background-color: #96b1d2;
+  }
 }
 
 .hidden {
