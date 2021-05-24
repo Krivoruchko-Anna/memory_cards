@@ -73,20 +73,20 @@ export default {
 
           this.shuffledNumbers.map(item => {
             item.clickable = false;
-          })
+          });
         }
 
         if (this.currentCard === this.newCurrentCard && this.currentId !== this.newCurrentId) {
           this.lockOpenedCardsWithNumber(card.number);
-
         } else {
-          this.returnsCardsToBackSide(card);
+          this.returnCardsToBackSide(card);
         }
       }
     },
 
     lockOpenedCardsWithNumber(number) {
       this.shuffledNumbers.map(item => {
+
         if (item.number === number) {
           item.clickable = false;
           item.backSide = false;
@@ -99,7 +99,7 @@ export default {
       })
     },
 
-    returnsCardsToBackSide(card) {
+    returnCardsToBackSide(card) {
       setTimeout(() => {
         if (card.number !== this.newCurrentCard) {
           card.backSide = true;
