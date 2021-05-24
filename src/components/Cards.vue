@@ -164,7 +164,7 @@ export default {
   align-items: center;
   justify-content: center;
   transition: .9s all;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 80px);
   width: 360px;
 
   @media (max-width: 500px) {
@@ -181,10 +181,16 @@ export default {
 .congratulations {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  width: calc(100% - 10px);
   margin-top: 30px;
   font-size: 34px;
   font-weight: bold;
   color: $main;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #7391b1;
+  border-radius: 4px;
   animation: fadeUp .9s ease-in-out;
 
   span {
@@ -209,6 +215,7 @@ export default {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: $main;
+  background-color: white;
   transition: .4s all ease-in-out;
 
   &:hover {
@@ -238,6 +245,14 @@ export default {
   }
 }
 
+.clicks {
+  margin-top: 18px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #7391b1;
+  border-radius: 4px;
+}
+
 .title {
   display: flex;
   justify-content: flex-start;
@@ -245,11 +260,7 @@ export default {
   font-size: 20px;
   color: $main;
 
-  &:first-child {
-    margin-top: 18px;
-  }
-
-  &:last-child {
+  &:nth-child(2) {
     margin-top: 5px;
   }
 
