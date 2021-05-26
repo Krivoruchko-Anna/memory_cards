@@ -187,7 +187,6 @@ export default {
   font-size: 34px;
   font-weight: bold;
   color: $main;
-  //background-color: white;
   padding: 20px;
   border-radius: 4px;
   animation: fadeUp .9s ease-in-out;
@@ -246,7 +245,6 @@ export default {
 
 .clicks {
   margin-top: 18px;
-  //background-color: white;
   padding: 10px;
   border-radius: 4px;
 }
