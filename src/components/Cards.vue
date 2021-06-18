@@ -164,7 +164,7 @@ export default {
   align-items: center;
   justify-content: center;
   transition: .9s all;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 120px);
   width: 360px;
 
   @media (max-width: 500px) {
@@ -183,11 +183,10 @@ export default {
   flex-direction: column;
   box-sizing: border-box;
   width: calc(100% - 10px);
-  margin-top: 30px;
+  margin-top: 10px;
   font-size: 34px;
   font-weight: bold;
-  color: $main;
-  //background-color: white;
+  color: $accent;
   padding: 20px;
   border-radius: 4px;
   animation: fadeUp .9s ease-in-out;
@@ -246,7 +245,6 @@ export default {
 
 .clicks {
   margin-top: 18px;
-  //background-color: white;
   padding: 10px;
   border-radius: 4px;
 }

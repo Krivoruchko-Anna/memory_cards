@@ -31,16 +31,20 @@ export default {
     width: 50px;
     height: 50px;
   }
-
-  &:hover {
-    background-color: #96b1d2;
-  }
 }
 
 .hidden {
   background-color: $main;
   background-size: cover;
   transition: .4s all ease-in-out;
+
+  &:hover {
+    background-color: $secondary;
+
+    @media (max-width: 900px) {
+      background-color: $main;
+    }
+  }
 }
 
 .animated {
