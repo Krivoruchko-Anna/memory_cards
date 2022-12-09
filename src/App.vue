@@ -6,6 +6,7 @@
 body {
   margin: 0;
 }
+
 #app {
   height: 100vh;
   background-image: url("assets/main-bg.png");

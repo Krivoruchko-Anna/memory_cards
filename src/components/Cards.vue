@@ -24,28 +24,28 @@ import AppCard from "./Card";
 
 export default {
   components: {
-     AppCard
+    AppCard
   },
 
   data() {
     return {
       cards: [
-        { number: 1, backSide: true, clickable: true, animated: false, open: false, id: 1 },
-        { number: 2, backSide: true, clickable: true, animated: false, open: false, id: 2 },
-        { number: 3, backSide: true, clickable: true, animated: false, open: false, id: 3 },
-        { number: 4, backSide: true, clickable: true, animated: false, open: false, id: 4 },
-        { number: 5, backSide: true, clickable: true, animated: false, open: false, id: 5 },
-        { number: 6, backSide: true, clickable: true, animated: false, open: false, id: 6 },
-        { number: 7, backSide: true, clickable: true, animated: false, open: false, id: 7 },
-        { number: 8, backSide: true, clickable: true, animated: false, open: false, id: 8 },
-        { number: 1, backSide: true, clickable: true, animated: false, open: false, id: 9 },
-        { number: 2, backSide: true, clickable: true, animated: false, open: false, id: 10 },
-        { number: 3, backSide: true, clickable: true, animated: false, open: false, id: 11 },
-        { number: 4, backSide: true, clickable: true, animated: false, open: false, id: 12 },
-        { number: 5, backSide: true, clickable: true, animated: false, open: false, id: 13 },
-        { number: 6, backSide: true, clickable: true, animated: false, open: false, id: 14 },
-        { number: 7, backSide: true, clickable: true, animated: false, open: false, id: 15 },
-        { number: 8, backSide: true, clickable: true, animated: false, open: false, id: 16 },
+        {number: 1, backSide: true, clickable: true, animated: false, open: false, id: 1},
+        {number: 2, backSide: true, clickable: true, animated: false, open: false, id: 2},
+        {number: 3, backSide: true, clickable: true, animated: false, open: false, id: 3},
+        {number: 4, backSide: true, clickable: true, animated: false, open: false, id: 4},
+        {number: 5, backSide: true, clickable: true, animated: false, open: false, id: 5},
+        {number: 6, backSide: true, clickable: true, animated: false, open: false, id: 6},
+        {number: 7, backSide: true, clickable: true, animated: false, open: false, id: 7},
+        {number: 8, backSide: true, clickable: true, animated: false, open: false, id: 8},
+        {number: 1, backSide: true, clickable: true, animated: false, open: false, id: 9},
+        {number: 2, backSide: true, clickable: true, animated: false, open: false, id: 10},
+        {number: 3, backSide: true, clickable: true, animated: false, open: false, id: 11},
+        {number: 4, backSide: true, clickable: true, animated: false, open: false, id: 12},
+        {number: 5, backSide: true, clickable: true, animated: false, open: false, id: 13},
+        {number: 6, backSide: true, clickable: true, animated: false, open: false, id: 14},
+        {number: 7, backSide: true, clickable: true, animated: false, open: false, id: 15},
+        {number: 8, backSide: true, clickable: true, animated: false, open: false, id: 16},
       ],
 
       shuffledNumbers: [],

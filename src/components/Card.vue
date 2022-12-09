@@ -1,6 +1,6 @@
 <template>
   <div class="card" :class="{ 'hidden': card.backSide,  'animated': card.animated }">
-    {{ !card.backSide ? card.number :  '' }}
+    {{ !card.backSide ? card.number : '' }}
   </div>
 </template>
 
